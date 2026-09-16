@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>제주 만원의 행복 - 10,000원으로 즐기는 제주</title>
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="intro.css" />
+</head>
+<body class="intro-active">
+
+<!-- ============ 카톡 스타일 인트로 ============ -->
+<div class="intro-overlay" id="introOverlay">
+  <button class="intro-skip" id="introSkip">건너뛰기 ▶</button>
+
+  <div class="chat-frame">
+    <div class="chat-header">
+      <span class="chat-back">‹</span>
+      <div class="chat-header-info">
+        <span class="chat-title">단짝친구</span>
+        <span class="chat-sub">2</span>
+      </div>
+      <span class="chat-menu">≡</span>
+    </div>
+
+    <div class="chat-body" id="chatBody"></div>
+  </div>
+</div>
+
+<header class="site-header">
+  <h1>🍊 제주, 만원의 행복</h1>
+  <p class="subtitle">10,000원으로 즐길 수 있는 제주도의 순간들</p>
+</header>
+
+<section class="filter-bar" id="filterBar" aria-label="카테고리 선택">
+  <!-- 버튼은 script.js에서 CATEGORIES 데이터를 기반으로 자동 생성됩니다 -->
+</section>
+
+<main class="map-wrap">
+  <div id="map"></div>
+
+  <div class="map-hint" id="mapHint">위에서 카테고리를 선택해 지도에 표시해보세요 👆</div>
+</main>
+
+<section class="detail-panel" id="detailPanel">
+  <div class="detail-empty" id="detailEmpty">
+    지도의 핀을 클릭하면 이곳에 자세한 정보가 표시됩니다.
+  </div>
+
+  <div class="detail-content" id="detailContent" hidden>
+    <button class="detail-close" id="detailClose" aria-label="닫기">✕</button>
+    <span class="detail-badge" id="detailBadge"></span>
+    <h2 id="detailName"></h2>
+    <p class="detail-price" id="detailPrice"></p>
+    <p class="detail-desc" id="detailDesc"></p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p>제주 만원의 행복 · 위치 정보는 실제와 다를 수 있습니다</p>
+</footer>
+
+<!-- Leaflet JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="data.js"></script>
+<script src="script.js"></script>
+<script src="intro.js"></script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+/* ============================================
+   카카오톡 스타일 인트로 오버레이
+============================================ */
+
+body.intro-active {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #757575;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.intro-overlay.exit {
+  opacity: 0;
+  transform: translateY(-4%);
+  pointer-events: none;
+}
+
+.intro-overlay.hidden {
+  display: none;
+}
+
+.intro-skip {
+  position: absolute;
+  top: max(14px, env(safe-area-inset-top));
+  right: 14px;
+  z-index: 5;
+  border: none;
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-size: 12px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.intro-skip:hover { background: rgba(0, 0, 0, 0.5); }
+
+/* ---------------- 채팅창 프레임 ---------------- */
+.chat-frame {
+  width: min(430px, 100vw);
+  height: min(820px, 100vh);
+  background: #b2c7d9;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+}
+
+@media (min-width: 431px) and (min-height: 821px) {
+  .chat-frame { border-radius: 22px; }
+}
+
+.chat-header {
+  flex: none;
+  height: 54px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  border-bottom: 1px solid #eee;
+}
+.chat-back { font-size: 24px; color: #333; }
+.chat-header-info {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.chat-title { font-weight: 700; font-size: 16px; color: #222; }
+.chat-sub { font-size: 13px; color: #999; }
+.chat-menu { font-size: 20px; color: #333; }
+
+/* 프레임이 화면을 꽉 채우는 모바일에서는 건너뛰기 버튼과 겹치므로 장식용 메뉴 아이콘을 숨김 */
+@media (max-width: 430px), (max-height: 820px) {
+  .chat-menu { display: none; }
+  .chat-header { padding-right: 110px; }
+}
+
+/* ---------------- 메시지 영역 ---------------- */
+.chat-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.msg-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  max-width: 100%;
+  animation: bubbleIn 0.25s ease;
+}
+
+@keyframes bubbleIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.msg-row.friend { justify-content: flex-start; }
+.msg-row.me { justify-content: flex-end; }
+
+.msg-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #ffd966;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex: none;
+  align-self: flex-start;
+}
+.msg-avatar.spacer { visibility: hidden; }
+
+.msg-col {
+  display: flex;
+  flex-direction: column;
+  max-width: 68%;
+}
+.msg-row.friend .msg-col { align-items: flex-start; }
+.msg-row.me .msg-col { align-items: flex-end; }
+
+.msg-name {
+  font-size: 12px;
+  color: #555;
+  margin: 0 0 3px 2px;
+}
+
+.msg-line {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+}
+.msg-row.me .msg-line { flex-direction: row-reverse; }
+
+.bubble {
+  padding: 9px 12px;
+  font-size: 14.5px;
+  line-height: 1.4;
+  border-radius: 16px;
+  word-break: break-word;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.msg-row.friend .bubble {
+  background: #ffffff;
+  color: #222;
+  border-bottom-left-radius: 4px;
+}
+
+.msg-row.me .bubble {
+  background: #fee500;
+  color: #222;
+  border-bottom-right-radius: 4px;
+}
+
+.msg-time {
+  font-size: 10.5px;
+  color: #8a8a8a;
+  white-space: nowrap;
+  margin-bottom: 2px;
+}
+
+/* ---------------- 타이핑 인디케이터 ---------------- */
+.typing-bubble {
+  background: #ffffff;
+  border-radius: 16px;
+  border-bottom-left-radius: 4px;
+  padding: 12px 14px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.typing-bubble span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #b7b7b7;
+  animation: typingBounce 1s infinite ease-in-out;
+}
+.typing-bubble span:nth-child(2) { animation-delay: 0.15s; }
+.typing-bubble span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* ---------------- 시스템 메시지 (전환 안내) ---------------- */
+.msg-system {
+  align-self: center;
+  background: rgba(0, 0, 0, 0.25);
+  color: #fff;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  margin: 10px 0;
+}
