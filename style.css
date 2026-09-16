@@ -1,16 +1,17 @@
 :root {
-  --food: #e63946;
-  --cafe: #c98a3e;
-  --space: #7b4fa3;
-  --outdoor: #2a9d5c;
-  --sea: #1d7fb0;
+  --food: #ff6b6b;
+  --cafe: #d9922f;
+  --space: #9b6bd9;
+  --outdoor: #37b877;
+  --sea: #2fa8d5;
 
-  --bg: #faf7f2;
-  --ink: #2b2b2b;
-  --muted: #6b6b6b;
+  --bg: #fff8ef;
+  --bg-accent: #fff1dc;
+  --ink: #3a2f28;
+  --muted: #9a8c7f;
   --card: #ffffff;
-  --border: #e5e0d8;
-  --radius: 14px;
+  --border: #f0e4d4;
+  --radius: 20px;
 }
 
 * { box-sizing: border-box; }
@@ -18,111 +19,211 @@
 body {
   margin: 0;
   font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-  background: var(--bg);
+  background:
+    radial-gradient(60% 50% at 12% 0%, var(--bg-accent) 0%, transparent 60%),
+    radial-gradient(50% 40% at 100% 10%, #eaf6ee 0%, transparent 60%),
+    var(--bg);
   color: var(--ink);
+}
+
+.cute-font {
+  font-family: "Jua", "Pretendard", sans-serif;
+  font-weight: 400;
 }
 
 .site-header {
   text-align: center;
-  padding: 28px 16px 16px;
+  padding: 36px 16px 20px;
 }
+
+.hero-badge {
+  display: inline-block;
+  font-family: "Jua", "Pretendard", sans-serif;
+  font-size: 13px;
+  color: #d9822b;
+  background: #fff1dc;
+  border: 1.5px dashed #f3c98a;
+  padding: 6px 16px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
 .site-header h1 {
-  margin: 0 0 6px;
-  font-size: clamp(22px, 5vw, 32px);
+  font-family: "Jua", "Pretendard", sans-serif;
+  font-weight: 400;
+  margin: 0 0 8px;
+  font-size: clamp(26px, 6vw, 38px);
+  color: #ff8a3d;
+  text-shadow: 2px 2px 0 rgba(255, 138, 61, 0.12);
 }
 .subtitle {
   margin: 0;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 14.5px;
 }
 
-/* ---------------- 필터 바 ---------------- */
+/* ---------------- 카테고리 섹션 ---------------- */
+.category-section {
+  width: min(1100px, 96vw);
+  margin: 8px auto 0;
+}
+
+.section-title {
+  font-family: "Jua", "Pretendard", sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  color: var(--ink);
+  text-align: center;
+  margin: 0 0 16px;
+}
+
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
-  padding: 8px 16px 20px;
+  gap: 18px;
+  padding: 4px 16px 8px;
 }
 
-.filter-btn {
+.cat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 76px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  padding: 0;
+}
+
+.cat-circle {
+  position: relative;
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 10px 16px;
-  border-radius: 999px;
-  border: 2px solid var(--cat-color, #ccc);
-  background: #fff;
-  color: var(--cat-color, #333);
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.18s ease;
-  -webkit-tap-highlight-color: transparent;
+  justify-content: center;
+  font-size: 28px;
+  background: color-mix(in srgb, var(--cat-color, #ccc) 16%, white);
+  border: 3px solid transparent;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
-.filter-btn .emoji { font-size: 16px; }
-
-.filter-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-}
-
-.filter-btn.active {
-  background: var(--cat-color, #333);
+.cat-check {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--cat-color, #37b877);
   color: #fff;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  opacity: 0;
+  transform: scale(0.4);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cat-label {
+  font-family: "Jua", "Pretendard", sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--muted);
+  transition: color 0.2s ease;
+}
+
+.cat-item:hover .cat-circle {
+  transform: translateY(-3px) scale(1.05);
+}
+
+.cat-item.active .cat-circle {
+  background: color-mix(in srgb, var(--cat-color, #ccc) 30%, white);
+  border-color: var(--cat-color, #ccc);
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--cat-color, #ccc) 40%, transparent);
+}
+
+.cat-item.active .cat-check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cat-item.active .cat-label {
+  color: var(--cat-color, var(--ink));
+  font-weight: 400;
 }
 
 /* ---------------- 지도 영역 ---------------- */
-.map-wrap {
+.map-section {
   position: relative;
   width: min(1100px, 96vw);
-  margin: 0 auto;
+  margin: 28px auto 0;
+}
+
+.map-card {
+  background: var(--card);
+  padding: 10px;
+  border-radius: 28px;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(210, 150, 90, 0.12);
 }
 
 #map {
   width: 100%;
   height: 62vh;
   min-height: 380px;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  border-radius: 20px;
 }
 
 .map-hint {
   text-align: center;
   color: var(--muted);
   font-size: 13px;
-  padding: 10px 0 4px;
+  padding: 12px 0 4px;
   transition: opacity 0.2s;
 }
 .map-hint.hide { opacity: 0; height: 0; overflow: hidden; padding: 0; }
 
 /* ---------------- 커스텀 마커 ---------------- */
 .spot-marker {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 50% 50% 50% 0;
   transform: rotate(-45deg);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+  border: 3px solid #fff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
   cursor: pointer;
+  animation: markerPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .spot-marker span {
   transform: rotate(45deg);
   font-size: 15px;
 }
 
-/* Leaflet popup 최소화 스타일 */
+@keyframes markerPop {
+  from { transform: rotate(-45deg) scale(0); }
+  to { transform: rotate(-45deg) scale(1); }
+}
+
+/* Leaflet popup 귀엽게 다듬기 */
 .leaflet-popup-content-wrapper {
-  border-radius: 10px;
+  border-radius: 16px;
 }
 .leaflet-popup-content {
   font-size: 13px;
   margin: 10px 12px;
+  font-family: "Pretendard", sans-serif;
 }
 .popup-title { font-weight: 700; margin-bottom: 2px; }
 .popup-hint { color: var(--muted); font-size: 12px; }
@@ -134,10 +235,10 @@ body {
   min-height: 140px;
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: 24px;
   padding: 24px;
   scroll-margin-top: 20px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 28px rgba(210, 150, 90, 0.1);
 }
 
 .detail-empty {
@@ -145,6 +246,12 @@ body {
   text-align: center;
   font-size: 14px;
   padding: 24px 0;
+}
+.detail-empty::before {
+  content: "🐿️";
+  display: block;
+  font-size: 28px;
+  margin-bottom: 8px;
 }
 
 .detail-content {
@@ -159,17 +266,20 @@ body {
 
 .detail-badge {
   display: inline-block;
-  padding: 4px 12px;
+  padding: 5px 14px;
   border-radius: 999px;
   color: #fff;
+  font-family: "Jua", "Pretendard", sans-serif;
   font-size: 12px;
-  font-weight: 700;
   margin-bottom: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
 
 .detail-content h2 {
-  margin: 0 0 8px;
-  font-size: 22px;
+  font-family: "Jua", "Pretendard", sans-serif;
+  font-weight: 400;
+  margin: 0 0 10px;
+  font-size: 23px;
 }
 
 .detail-price {
@@ -177,8 +287,8 @@ body {
   font-weight: 700;
   color: #b5651d;
   background: #fff4e6;
-  padding: 4px 10px;
-  border-radius: 8px;
+  padding: 5px 12px;
+  border-radius: 999px;
   font-size: 13px;
   margin-bottom: 12px;
 }
@@ -207,12 +317,16 @@ body {
   text-align: center;
   color: var(--muted);
   font-size: 12px;
-  padding: 20px 0 32px;
+  padding: 24px 0 36px;
 }
 
 /* ---------------- 반응형 ---------------- */
 @media (max-width: 600px) {
-  .filter-btn { padding: 8px 12px; font-size: 13px; }
+  .filter-bar { gap: 12px; }
+  .cat-item { width: 64px; }
+  .cat-circle { width: 56px; height: 56px; font-size: 24px; }
+  .cat-label { font-size: 12px; }
   #map { height: 52vh; min-height: 320px; }
+  .map-card { padding: 8px; border-radius: 22px; }
   .detail-panel { padding: 18px; }
 }

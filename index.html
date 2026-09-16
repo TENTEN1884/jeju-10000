@@ -8,6 +8,11 @@
 <!-- Leaflet CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
 
+<!-- 귀여운 느낌의 제목용 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
+
 <link rel="stylesheet" href="style.css" />
 <link rel="stylesheet" href="intro.css" />
 </head>
@@ -32,18 +37,25 @@
 </div>
 
 <header class="site-header">
-  <h1>🍊 제주, 만원의 행복</h1>
-  <p class="subtitle">10,000원으로 즐길 수 있는 제주도의 순간들</p>
+  <span class="hero-badge">🍊 제주 여행 만원 챌린지</span>
+  <h1>제주, 만원의 행복</h1>
+  <p class="subtitle">10,000원으로 즐길 수 있는 제주도의 순간들을 모아봤어요</p>
 </header>
 
-<section class="filter-bar" id="filterBar" aria-label="카테고리 선택">
-  <!-- 버튼은 script.js에서 CATEGORIES 데이터를 기반으로 자동 생성됩니다 -->
+<section class="category-section" aria-label="카테고리 선택">
+  <h2 class="section-title">카테고리를 골라보세요 🧡</h2>
+  <div class="filter-bar" id="filterBar">
+    <!-- 버튼은 script.js에서 CATEGORIES 데이터를 기반으로 자동 생성됩니다 -->
+  </div>
 </section>
 
-<main class="map-wrap">
-  <div id="map"></div>
+<main class="map-section">
+  <h2 class="section-title">지도에서 확인해보세요 🗺️</h2>
+  <div class="map-card">
+    <div id="map"></div>
+  </div>
 
-  <div class="map-hint" id="mapHint">위에서 카테고리를 선택해 지도에 표시해보세요 👆</div>
+  <div class="map-hint" id="mapHint">위에서 카테고리를 선택하면 지도에 콕콕 찍혀요 👆</div>
 </main>
 
 <section class="detail-panel" id="detailPanel">

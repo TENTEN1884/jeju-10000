@@ -37,10 +37,16 @@ const filterBar = document.getElementById("filterBar");
 
 Object.entries(CATEGORIES).forEach(([key, cat]) => {
   const btn = document.createElement("button");
-  btn.className = "filter-btn";
+  btn.className = "cat-item";
   btn.style.setProperty("--cat-color", cat.color);
   btn.dataset.category = key;
-  btn.innerHTML = `<span class="emoji">${cat.emoji}</span><span>${cat.label}</span>`;
+  btn.innerHTML = `
+    <span class="cat-circle">
+      <span class="cat-emoji">${cat.emoji}</span>
+      <span class="cat-check">✓</span>
+    </span>
+    <span class="cat-label">${cat.label}</span>
+  `;
   btn.addEventListener("click", () => toggleCategory(key, btn));
   filterBar.appendChild(btn);
 });
